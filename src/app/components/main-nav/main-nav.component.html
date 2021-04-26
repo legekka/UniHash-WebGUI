@@ -1,0 +1,12 @@
+<mat-sidenav-container>
+  <mat-sidenav mode="side" opened>
+
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="rig-list">
+      <app-rig-details-card *ngFor="let rig of rigs"
+        [rig]="rig">
+      </app-rig-details-card>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

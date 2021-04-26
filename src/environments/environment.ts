@@ -3,7 +3,13 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiConfig:{
+    protocol: 'http',
+    domain: 'localhost',
+    port: 3000,
+    rigBaseUrl: 'rig'
+  }
 };
 
 /*
