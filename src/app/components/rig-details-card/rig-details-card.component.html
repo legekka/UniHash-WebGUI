@@ -1,1 +1,75 @@
-{{ rig.name }}
+<mat-card>
+  <mat-card-header>
+    {{ rig.name }}
+  </mat-card-header>
+  <mat-card-content>
+    <div class="properties">
+      <div class="property">
+        <div class="caption">
+          Speed:
+        </div>
+        <div class="value">
+          <ng-container *ngIf="getLastSnapshot().speed != null">
+            {{ getLastSnapshot().speed | number:'1.2-2' }} {{ getLastSnapshot().displaySuffix }}/s
+          </ng-container>
+          <ng-container *ngIf="getLastSnapshot().speed == null">
+            -
+          </ng-container>
+        </div>
+      </div>
+      <div class="property">
+        <div class="caption">
+          Algorithm:
+        </div>
+        <div class="value">
+          <ng-container *ngIf="getLastSnapshot().speed != null">
+            {{ MiningAlgorithmDisplayNames.get(getLastSnapshot().algorithm) }}
+          </ng-container>
+          <ng-container *ngIf="getLastSnapshot().speed == null">
+            -
+          </ng-container>
+        </div>
+      </div>
+      <div class="property">
+        <div class="caption">
+          Profitability:
+        </div>
+        <div class="value">
+          <ng-container *ngIf="getLastSnapshot().profitability != null">
+            {{ getLastSnapshot().profitability | number:'1.8-8'  }} BTC/day
+          </ng-container>
+          <ng-container *ngIf="getLastSnapshot().profitability == null">
+            -
+          </ng-container>
+        </div>
+      </div>
+      <div class="property">
+        <div class="caption">
+          Temperature:
+        </div>
+        <div class="value">
+          <ng-container *ngIf="getLastSnapshot().temperature != null">
+            {{ getLastSnapshot().temperature }} °C
+          </ng-container>
+          <ng-container *ngIf="getLastSnapshot().temperature == null">
+            -
+          </ng-container>
+        </div>
+      </div>
+      <div class="property">
+        <div class="caption">
+          Power Usage:
+        </div>
+        <div class="value">
+          <ng-container *ngIf="getLastSnapshot().powerUsage != null && getLastSnapshot().powerUsage != -1">
+            {{ getLastSnapshot().powerUsage }} W
+          </ng-container>
+          <ng-container *ngIf="getLastSnapshot().powerUsage == null || getLastSnapshot().powerUsage == -1">
+            -
+          </ng-container>
+        </div>
+      </div>
+
+    </div>
+  </mat-card-content>
+</mat-card>
