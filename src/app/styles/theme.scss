@@ -1,0 +1,19 @@
+@import '~@angular/material/theming';
+
+@import './colors.scss';
+
+$unihash-app-typography: mat-typography-config(
+  $font-family: '"Saira", sans-serif;'
+);
+
+@include mat-core($unihash-app-typography);
+
+$unihash-app-theme: mat-dark-theme((
+  color: (
+    primary: $unihash-app-primary,
+    accent: $unihash-app-accent,
+    warn: $unihash-app-warn
+  )
+));
+
+@include angular-material-theme($unihash-app-theme);

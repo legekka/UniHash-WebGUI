@@ -1,0 +1,9 @@
+@import '~@angular/material/theming';
+
+$unihash-app-primary: mat-palette($mat-light-blue, 900);
+$unihash-app-accent: mat-palette($mat-pink, 600);
+$unihash-app-warn: mat-palette($mat-red, A400);
+
+$primary: mat-color($unihash-app-primary);
+$accent: mat-color($unihash-app-accent);
+$warn: mat-color($unihash-app-warn);
