@@ -16,7 +16,11 @@ export class MainNavComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.rigService.getRigSnapshots().subscribe(rigs => this.rigs = rigs);
+    //this.rigService.getRigSnapshots().subscribe(rigs => this.rigs = rigs);
+    this.rigService.getRigSnapshotSource().subscribe(rigs => {
+      const a = '1';
+    });
+    this.rigService.getRigSnapshotsCombined().subscribe(rigs => this.rigs = rigs);
   }
 
 }

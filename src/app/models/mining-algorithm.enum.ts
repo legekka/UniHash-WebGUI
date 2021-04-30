@@ -94,7 +94,7 @@ MiningAlgorithmDisplayNames.set(MiningAlgorithm.LYRA2Z, 'Lyra2Z');
 MiningAlgorithmDisplayNames.set(MiningAlgorithm.X16R, 'X16R');
 MiningAlgorithmDisplayNames.set(MiningAlgorithm.CRYPTONIGHTV8, 'CryptoNightV8');
 MiningAlgorithmDisplayNames.set(MiningAlgorithm.SHA256ASICBOOST, 'SHA-256 Asic Boost');
-MiningAlgorithmDisplayNames.set(MiningAlgorithm.ZHASH, 'ZHa');
+MiningAlgorithmDisplayNames.set(MiningAlgorithm.ZHASH, 'ZHash');
 MiningAlgorithmDisplayNames.set(MiningAlgorithm.BEAM, 'BEAM');
 MiningAlgorithmDisplayNames.set(MiningAlgorithm.GRINCUCKAROO29, 'GrinCuckaroo29');
 MiningAlgorithmDisplayNames.set(MiningAlgorithm.GRINCUCKATOO31, 'GrinCuckaroo31');
