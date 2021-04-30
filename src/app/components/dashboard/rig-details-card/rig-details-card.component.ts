@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MiningAlgorithmDisplayNames } from 'src/app/models/mining-algorithm.enum';
-import { Rig } from 'src/app/models/rig';
-import { RigSnapshot } from 'src/app/models/rig-snapshot';
+import { RigWithLatestSnapshot } from 'src/app/models/rig';
 
 @Component({
   selector: 'app-rig-details-card',
@@ -13,19 +12,12 @@ export class RigDetailsCardComponent implements OnInit {
   public MiningAlgorithmDisplayNames = MiningAlgorithmDisplayNames;
 
   @Input()
-  rig: Rig;
+  rig: RigWithLatestSnapshot;
 
   constructor() { }
 
   ngOnInit(): void {
-    
-  }
 
-  getLastSnapshot(): RigSnapshot {
-    if (this.rig.snapshots == null || this.rig.snapshots.length === 0) {
-      return null;
-    }
-    return this.rig.snapshots[this.rig.snapshots.length - 1];
   }
 
 }
