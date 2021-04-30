@@ -5,7 +5,7 @@ import { mergeMap, switchMap, tap } from 'rxjs/operators';
 import { Rig } from 'src/app/models/rig';
 import { RigBaseUrl, SocketEndpoint } from '../tokens';
 import * as SocketIOClient from 'socket.io-client';
-import { io } from 'socket.io-client';
+// import { io } from 'socket.io-client';
 import { RigSnapshot } from 'src/app/models/rig-snapshot';
 
 @Injectable({
@@ -35,7 +35,7 @@ export class RigService {
   // Initializers
 
   private initSocket(): void {
-    this.socket = io(this.socketEndpoint);
+    this.socket = SocketIOClient(this.socketEndpoint);
     this.socket.on('rig-snapshots', rigs => this.rigsSubject$.next(rigs));
   }
 
