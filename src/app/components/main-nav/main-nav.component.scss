@@ -1,16 +1,11 @@
 .mat-sidenav-container {
   height: 100vh;
-
+  
   .mat-sidenav {
     width: 196px;
   }
-
+  
   .mat-sidenav-content {
-    .rig-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      padding: 8px;
-    }
+    
   }
 }

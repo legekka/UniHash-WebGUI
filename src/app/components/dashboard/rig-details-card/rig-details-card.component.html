@@ -1,6 +1,8 @@
 <mat-card>
   <mat-card-header>
-    {{ rig.name }}
+    <div mat-card-avatar></div>
+    <mat-card-title>{{ rig.name }}</mat-card-title>
+    <mat-card-subtitle>{{ getLastSnapshot().minerStatus | titlecase }}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
     <div class="properties">
@@ -36,7 +38,7 @@
         </div>
         <div class="value">
           <ng-container *ngIf="getLastSnapshot().profitability != null">
-            {{ getLastSnapshot().profitability | number:'1.8-8'  }} BTC/day
+            {{ getLastSnapshot().profitability | number:'1.8-8' }} BTC/day
           </ng-container>
           <ng-container *ngIf="getLastSnapshot().profitability == null">
             -

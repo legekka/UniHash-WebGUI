@@ -18,8 +18,7 @@ export class RigDetailsCardComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.getLastSnapshot());
-    console.log(MiningAlgorithmDisplayNames.get(this.getLastSnapshot().algorithm));
+    
   }
 
   getLastSnapshot(): RigSnapshot {

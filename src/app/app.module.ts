@@ -1,21 +1,24 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RigBaseUrl, SocketEndpoint } from './services/tokens';
 import { environment } from 'src/environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RigDetailsCardComponent } from './components/rig-details-card/rig-details-card.component';
+import { RigDetailsCardComponent } from './components/dashboard/rig-details-card/rig-details-card.component';
 import { MainNavComponent } from './components/main-nav/main-nav.component';
 import { MaterialModule } from './modules/material/material.module';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { SummaryCardComponent } from './components/dashboard/summary-card/summary-card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RigDetailsCardComponent,
-    MainNavComponent
+    MainNavComponent,
+    DashboardComponent,
+    SummaryCardComponent
   ],
   imports: [
     BrowserModule,

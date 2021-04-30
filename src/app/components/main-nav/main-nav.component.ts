@@ -9,18 +9,9 @@ import { RigService } from 'src/app/services/rig/rig.service';
 })
 export class MainNavComponent implements OnInit {
 
-  rigs: Rig[];
-
-  constructor(
-    private rigService: RigService
-  ) { }
+  constructor() { }
 
   ngOnInit(): void {
-    //this.rigService.getRigSnapshots().subscribe(rigs => this.rigs = rigs);
-    this.rigService.getRigSnapshotSource().subscribe(rigs => {
-      const a = '1';
-    });
-    this.rigService.getRigSnapshotsCombined().subscribe(rigs => this.rigs = rigs);
   }
 
 }

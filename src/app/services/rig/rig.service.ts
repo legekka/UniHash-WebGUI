@@ -41,7 +41,10 @@ export class RigService {
 
   private initCombineSource(): void {
     this.getRigSnapshots().pipe(
-      tap(rigs => this.rigs = rigs),
+      tap(rigs => {
+        this.rigs = rigs;
+        this.rigsCombineSubject$.next(this.rigs);
+      }),
       switchMap(() => this.rigsSource$),
       tap((rigs: Rig[]) => {
         rigs.forEach(rig => {
