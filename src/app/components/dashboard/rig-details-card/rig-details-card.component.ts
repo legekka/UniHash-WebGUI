@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MiningAlgorithmDisplayNames } from 'src/app/models/mining-algorithm.enum';
-import { RigWithLatestSnapshot } from 'src/app/models/rig';
+import { RigWithHelpers } from 'src/app/models/rig';
 
 @Component({
   selector: 'app-rig-details-card',
@@ -12,7 +12,7 @@ export class RigDetailsCardComponent implements OnInit {
   public MiningAlgorithmDisplayNames = MiningAlgorithmDisplayNames;
 
   @Input()
-  rig: RigWithLatestSnapshot;
+  rig: RigWithHelpers;
 
   constructor() { }
 

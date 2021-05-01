@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CreateRigWithLatestSnapshot, RigWithLatestSnapshot } from 'src/app/models/rig';
+import { CreateRigWithLatestSnapshot, RigWithHelpers } from 'src/app/models/rig';
 import { RigService } from 'src/app/services/rig/rig.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { RigService } from 'src/app/services/rig/rig.service';
 })
 export class DashboardComponent implements OnInit {
 
-  rigs: RigWithLatestSnapshot[];
+  rigs: RigWithHelpers[];
 
   constructor(
     private rigService: RigService

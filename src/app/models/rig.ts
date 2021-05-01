@@ -7,11 +7,11 @@ export interface Rig {
   snapshots: RigSnapshot[];
 }
 
-export interface RigWithLatestSnapshot extends Rig {
-  latestSnapshot?: RigSnapshot;
+export interface RigWithHelpers extends Rig {
+  latestSnapshot: RigSnapshot;
 }
 
-export function CreateRigWithLatestSnapshot(rig: Rig): RigWithLatestSnapshot {
+export function CreateRigWithLatestSnapshot(rig: Rig): RigWithHelpers {
   const latestSnapshot = rig.snapshots.length > 0
     ? rig.snapshots[rig.snapshots.length - 1]
     : null ;

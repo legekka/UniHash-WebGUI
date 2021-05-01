@@ -11,6 +11,10 @@ import { MainNavComponent } from './components/main-nav/main-nav.component';
 import { MaterialModule } from './modules/material/material.module';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SummaryCardComponent } from './components/dashboard/summary-card/summary-card.component';
+import { HashratePipe } from './pipes/hashrate/hashrate.pipe';
+import { ProfitabilityPipe } from './pipes/profitability/profitability.pipe';
+import { WattagePipe } from './pipes/wattage/wattage.pipe';
+import { TemperaturePipe } from './pipes/temperature/temperature.pipe';
 
 @NgModule({
   declarations: [
@@ -18,7 +22,11 @@ import { SummaryCardComponent } from './components/dashboard/summary-card/summar
     RigDetailsCardComponent,
     MainNavComponent,
     DashboardComponent,
-    SummaryCardComponent
+    SummaryCardComponent,
+    HashratePipe,
+    ProfitabilityPipe,
+    WattagePipe,
+    TemperaturePipe
   ],
   imports: [
     BrowserModule,
