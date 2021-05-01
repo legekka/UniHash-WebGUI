@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CreateRigWithLatestSnapshot, RigWithHelpers } from 'src/app/models/rig';
+import { CreateRigWithHelpers, RigWithHelpers } from 'src/app/models/rig';
 import { RigService } from 'src/app/services/rig/rig.service';
 
 @Component({
@@ -17,7 +17,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.rigService.getRigSnapshotsCombined().subscribe(rigs => {
-      this.rigs = rigs.map(rig => CreateRigWithLatestSnapshot(rig));
+      this.rigs = rigs.map(rig => CreateRigWithHelpers(rig));
     });
   }
 }

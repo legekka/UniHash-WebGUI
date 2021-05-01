@@ -10,11 +10,13 @@ import { RigDetailsCardComponent } from './components/dashboard/rig-details-card
 import { MainNavComponent } from './components/main-nav/main-nav.component';
 import { MaterialModule } from './modules/material/material.module';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { SummaryCardComponent } from './components/dashboard/summary-card/summary-card.component';
 import { HashratePipe } from './pipes/hashrate/hashrate.pipe';
 import { ProfitabilityPipe } from './pipes/profitability/profitability.pipe';
 import { WattagePipe } from './pipes/wattage/wattage.pipe';
 import { TemperaturePipe } from './pipes/temperature/temperature.pipe';
+import { SummaryComponent } from './components/dashboard/summary/summary.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { ChartsComponent } from './components/dashboard/charts/charts.component';
 
 @NgModule({
   declarations: [
@@ -22,18 +24,20 @@ import { TemperaturePipe } from './pipes/temperature/temperature.pipe';
     RigDetailsCardComponent,
     MainNavComponent,
     DashboardComponent,
-    SummaryCardComponent,
     HashratePipe,
     ProfitabilityPipe,
     WattagePipe,
-    TemperaturePipe
+    TemperaturePipe,
+    SummaryComponent,
+    ChartsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    NgxChartsModule
   ],
   providers: [
     {

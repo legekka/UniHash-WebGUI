@@ -11,7 +11,7 @@ export interface RigWithHelpers extends Rig {
   latestSnapshot: RigSnapshot;
 }
 
-export function CreateRigWithLatestSnapshot(rig: Rig): RigWithHelpers {
+export function CreateRigWithHelpers(rig: Rig): RigWithHelpers {
   const latestSnapshot = rig.snapshots.length > 0
     ? rig.snapshots[rig.snapshots.length - 1]
     : null ;

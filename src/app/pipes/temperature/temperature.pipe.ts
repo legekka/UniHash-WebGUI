@@ -1,12 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-
-export type TemperatureUnit = 'kelvin' | 'celsius' | 'fahrenheit';
-
-export const TemperatureSuffix = {
-  kelvin: '°K',
-  celsius: '°C',
-  fahrenheit: '°F'
-}
+import { TemperatureSuffix, TemperatureUnit } from 'src/app/models/temperature';
 
 @Pipe({
   name: 'temperature'

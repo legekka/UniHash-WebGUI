@@ -1,0 +1,41 @@
+<div class="cards">
+  <mat-card class="profitability">
+    <mat-card-title>
+      Profitability
+    </mat-card-title>
+    <mat-card-content>
+      {{ totalProfitability | number:'1.8-8' | profitability:'BTC' }}
+    </mat-card-content>
+  </mat-card>
+  <mat-card class="hashrate-by-algorithm">
+    <mat-card-title>
+      Hashrate by algorithm
+    </mat-card-title>
+    <mat-card-content>
+      <div *ngFor="let algorithm of usedAlgorithms">
+        <div class="algorithm">
+          {{ MiningAlgorithmDisplayNames.get(algorithm) }}
+        </div>
+        <div class="hashrate">
+          {{ totalHashrateByAlgorithm.get(algorithm).speed | number:'1.2-2' | hashrate:totalHashrateByAlgorithm.get(algorithm).displaySuffix }}
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <mat-card class="power-usage">
+    <mat-card-title>
+      Power usage
+    </mat-card-title>
+    <mat-card-content>
+      {{ totalPowerUsage | wattage }}
+    </mat-card-content>
+  </mat-card>
+  <mat-card class="unpaid-amount">
+    <mat-card-title>
+      Unpaid amount
+    </mat-card-title>
+    <mat-card-content>
+      {{ totalUnpaidAmount | number:'1.8-8' }} BTC
+    </mat-card-content>
+  </mat-card>
+</div>

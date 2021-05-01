@@ -1,0 +1,15 @@
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 8px;
+
+  .mat-card {
+    &.hashrate-by-algorithm {
+      .algorithm {
+        font-size: 0.8rem;
+        line-height: 0.8rem;
+        color: #ffffff80;
+      }
+    }
+  }
+}
