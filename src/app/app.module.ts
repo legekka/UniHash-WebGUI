@@ -17,6 +17,8 @@ import { TemperaturePipe } from './pipes/temperature/temperature.pipe';
 import { SummaryComponent } from './components/dashboard/summary/summary.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { ChartsComponent } from './components/dashboard/charts/charts.component';
+import { SummaryTablesComponent } from './components/dashboard/summary-tables/summary-tables.component';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { ChartsComponent } from './components/dashboard/charts/charts.component'
     WattagePipe,
     TemperaturePipe,
     SummaryComponent,
-    ChartsComponent
+    ChartsComponent,
+    SummaryTablesComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +40,8 @@ import { ChartsComponent } from './components/dashboard/charts/charts.component'
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
-    NgxChartsModule
+    NgxChartsModule,
+    MatTableModule
   ],
   providers: [
     {
