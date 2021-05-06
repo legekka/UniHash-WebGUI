@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { LineChartOptions, ScaleTypes } from '@carbon/charts/interfaces';
+import { StackedAreaChart } from '@carbon/charts';
+import { ChartData, LineChartOptions, ScaleTypes, StackedAreaChartOptions } from '@carbon/charts/interfaces';
 import { switchMap, tap } from 'rxjs/operators';
 import { Rig } from 'src/app/models/rig';
 import { RigService } from 'src/app/services/rig/rig.service';
@@ -12,7 +13,35 @@ import "./ibm-plex-font.css";
 })
 export class CchartsComponent implements OnInit {
 
-  public options: LineChartOptions = {
+  public mhOptions: StackedAreaChartOptions = {
+    title: "Mining History",
+    axes: {
+      bottom: {
+        title: "Time",
+        mapsTo: "date",
+        scaleType: ScaleTypes.TIME
+      },
+      left: {
+        title: "Mined amount (BTC)",
+        stacked: true,
+        mapsTo: "value",
+        scaleType: ScaleTypes.LINEAR
+      }
+    },
+    animations: true,
+    points: {
+      radius: 0,
+      enabled: false
+    },
+    timeScale: {
+      addSpaceOnEdges: 0
+    },
+    resizable: true,
+    width: "100%",
+    height: "400px"
+  }
+
+  public tempOptions: LineChartOptions = {
     title: "Temperatures",
     axes: {
       bottom: {
@@ -32,15 +61,15 @@ export class CchartsComponent implements OnInit {
       enabled: false
     },
     timeScale: {
-      addSpaceOnEdges: 0.05
+      addSpaceOnEdges: 0
     },
     resizable: true,
-    curve: "curveMonotoneX",
     width: "100%",
     height: "400px"
   };
 
-  public data = [];
+  public tempData = [];
+  public mhData = [];
 
   constructor(private rigService: RigService) { }
 
@@ -53,13 +82,13 @@ export class CchartsComponent implements OnInit {
   }
 
   private addSnapshots(rigs: Rig[]): void {
-    if (this.data.length == 0) {
+    if (this.tempData.length == 0) {
       rigs.forEach(rig => {
-        rig.snapshots.forEach(snapshot => {
+        rig.snapshots.sort((a, b) => (new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime())).forEach(snapshot => {
           if (snapshot.temperature > 0) {
-            this.data.push({
+            this.tempData.push({
               group: rig.name,
-              date: snapshot.timestamp,
+              date: new Date(snapshot.timestamp),
               value: snapshot.temperature
             });
           }
@@ -68,22 +97,36 @@ export class CchartsComponent implements OnInit {
     } else {
       rigs.forEach((rig) => {
         if (rig.snapshots[0].temperature > 0) {
-          this.data.push({
+          this.tempData.push({
             group: rig.name,
-            date: rig.snapshots[0].timestamp,
+            date: new Date(rig.snapshots[0].timestamp),
             value: rig.snapshots[0].temperature
           })
         }
       })
     }
+    this.tempData = [...this.tempData];
 
-
-
-    //console.log(this.data);
-
-
-    this.data = [...this.data];
-
+    if (this.mhData.length == 0) {
+      rigs.forEach(rig => {
+        rig.snapshots.sort((a, b) => (new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime())).forEach(snapshot => {
+          this.mhData.push({
+            group: rig.name,
+            date: new Date(snapshot.timestamp),
+            value: snapshot.currentUnpaidAmount
+          });
+        })
+      })
+    } else {
+      rigs.forEach((rig) => {
+        this.mhData.push({
+          group: rig.name,
+          date: new Date(rig.snapshots[0].timestamp),
+          value: rig.snapshots[0].currentUnpaidAmount
+        })
+      })
+    }
+    this.mhData = [...this.mhData];
     // rigs.forEach((rig) => {
     //   if (this.data.filter(t => t.group == rig.name).length == 0) {
     //     this.data = this.data.concat(this.data, rig.snapshots.filter(snapshot => snapshot.temperature > 0).map((snapshot) => ({
