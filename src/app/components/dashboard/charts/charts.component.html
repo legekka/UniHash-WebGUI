@@ -1,20 +1,5 @@
 <div class="container">
   <mat-card class="chart dark">
-    <ngx-charts-line-chart
-      [scheme]="colorScheme"
-      [legend]="legend"
-      [showYAxisLabel]="showYAxisLabel"
-      [xAxis]="xAxis"
-      [yAxis]="yAxis"
-      [yAxisLabel]="yAxisLabel"
-      [timeline]="timeline"
-      [results]="data"
-      [curve]="curve"
-      [autoScale]="true"
-      [yAxisTickFormatting]="yAxisTickFormatting"
-      [xAxisTickFormatting]="xAxisTickFormatting"
-      [rotateXAxisTicks]="true"
-      [trimXAxisTicks]="true">
-    </ngx-charts-line-chart>
+    <div echarts [options]="options" [merge]="updateOptions" class="temp-chart"></div>
   </mat-card>
 </div>
