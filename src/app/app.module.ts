@@ -15,10 +15,10 @@ import { ProfitabilityPipe } from './pipes/profitability/profitability.pipe';
 import { WattagePipe } from './pipes/wattage/wattage.pipe';
 import { TemperaturePipe } from './pipes/temperature/temperature.pipe';
 import { SummaryComponent } from './components/dashboard/summary/summary.component';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { ChartsComponent } from './components/dashboard/charts/charts.component';
 import { SummaryTablesComponent } from './components/dashboard/summary-tables/summary-tables.component';
 import { MatTableModule } from '@angular/material/table';
+import { GoogleChartsModule } from 'angular-google-charts';
 
 @NgModule({
   declarations: [
@@ -40,8 +40,8 @@ import { MatTableModule } from '@angular/material/table';
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
-    NgxChartsModule,
-    MatTableModule
+    MatTableModule,
+    GoogleChartsModule
   ],
   providers: [
     {
