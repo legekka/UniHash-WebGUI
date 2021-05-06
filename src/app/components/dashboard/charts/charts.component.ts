@@ -14,19 +14,32 @@ export class ChartsComponent implements OnInit {
   private series: SeriesOption[] = [];
   private xAxisData = [];
   // options
-  options = {
+  options: EChartsOption = {
     title: {
       text: 'Temperature'
+    },
+    legend: {
+      //data: ['bar', 'bar2'],
+      align: 'left',
+    },
+    tooltip: {
+      trigger: 'axis'
     },
     series: this.series,
     xAxis: {
       name: 'Time',
-      type: 'time',
+      type: 'category',
       data: this.xAxisData
     },
     yAxis: {
       name: 'Celsius (°C)',
-      type: 'value'
+      type: 'value',
+      scale: true,
+      axisLabel: {
+        formatter: t => {
+          return t + "°C"
+        }
+      }
     }
   };
 
@@ -49,11 +62,11 @@ export class ChartsComponent implements OnInit {
       rigs.forEach(rig => {
         rig.snapshots.forEach(snapshot => {
           if (!this.xAxisData.includes(snapshot.timestamp))
-            this.xAxisData.push(new Date(snapshot.timestamp));
+            this.xAxisData.push(snapshot.timestamp);
         })
       })
     }
-    this.options.xAxis.data = this.xAxisData;
+    this.options.xAxis['data'] = this.xAxisData;
     rigs.forEach(rig => {
       const rigSeries = this.series.find(s => s.name === rig.name);
       if (rigSeries == null) {
@@ -72,33 +85,12 @@ export class ChartsComponent implements OnInit {
         const data = rigSeries.data as number[];
         data.push(rig.snapshots[0].temperature > 0 ? rig.snapshots[0].temperature : null);
         data.shift();
-        // let update = (this.updateOptions.series as SeriesOption[]).filter(t => t.name == series.name);
-        // if (update.length !== 0)
-        //   update[0].data = series.data;
+        if (this.xAxisData[this.xAxisData.length - 1] !== rig.snapshots[0].timestamp) {
+          this.xAxisData.push(rig.snapshots[0].timestamp);
+          this.xAxisData.shift();
+        }
       }
     })
-    this.options = {...this.options};
+    this.options = { ...this.options };
   }
 }
-    //   rigs.forEach((rig) => {
-    //     const series = this.data.find((s) => s.name === rig.name);
-    //     if (series == null) {
-    //       this.data.push({
-    //         name: rig.name,
-    //         series: rig.snapshots.filter(snapshot => snapshot.temperature > 0).map((snapshot) => ({
-    //           name: snapshot.timestamp,
-    //           value: snapshot.temperature,
-    //         }))
-    //       });
-    //     } else {
-    //       if (rig.snapshots[0].temperature > 0) {
-    //         series.series.push({
-    //           name: rig.snapshots[0].timestamp,
-    //           value: rig.snapshots[0].temperature,
-    //         });
-    //         series.series.shift();
-    //       }
-    //     }
-    //   });
-    //   this.data = [...this.data];
-    // }
