@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Series } from '@swimlane/ngx-charts';
 import { switchMap, tap } from 'rxjs/operators';
 import { Rig, RigWithHelpers } from 'src/app/models/rig';
 import { RigService } from 'src/app/services/rig/rig.service';
@@ -11,7 +10,7 @@ import { curveBasis } from 'd3-shape';
   styleUrls: ['./charts.component.scss'],
 })
 export class ChartsComponent implements OnInit {
-  data: Series[] = [];
+  data = [];
 
   // options
   legend: boolean = true;

@@ -31,6 +31,7 @@
               "src/assets"
             ],
             "styles": [
+              "@carbon/charts/styles-g90.css",
               "src/app/styles/theme.scss",
               "src/styles.scss"
             ],
