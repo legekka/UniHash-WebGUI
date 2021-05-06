@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LineChartOptions, ScaleTypes } from '@carbon/charts/interfaces';
 import { switchMap, tap } from 'rxjs/operators';
 import { Rig } from 'src/app/models/rig';
 import { RigService } from 'src/app/services/rig/rig.service';
@@ -11,21 +12,31 @@ import "./ibm-plex-font.css";
 })
 export class CchartsComponent implements OnInit {
 
-  public options = {
+  public options: LineChartOptions = {
     title: "Temperatures",
     axes: {
       bottom: {
         title: "Time",
         mapsTo: "date",
-        scaleType: "time"
+        scaleType: ScaleTypes.TIME
       },
       left: {
         mapsTo: "value",
         title: "Temperature (°C)",
-        scaleType: "linear"
+        scaleType: ScaleTypes.LINEAR
       }
     },
+    animations: true,
+    points: {
+      radius: 0,
+      enabled: false
+    },
+    timeScale: {
+      addSpaceOnEdges: 0.05
+    },
+    resizable: true,
     curve: "curveMonotoneX",
+    width: "100%",
     height: "400px"
   };
 
@@ -42,19 +53,35 @@ export class CchartsComponent implements OnInit {
   }
 
   private addSnapshots(rigs: Rig[]): void {
-
-
-
-    rigs.forEach((rig) => {
-      this.data.push({
-        group: rig.name,
-        date: rig.snapshots[0].timestamp,
-        value: rig.snapshots[0].temperature
+    if (this.data.length == 0) {
+      rigs.forEach(rig => {
+        rig.snapshots.forEach(snapshot => {
+          if (snapshot.temperature > 0) {
+            this.data.push({
+              group: rig.name,
+              date: snapshot.timestamp,
+              value: snapshot.temperature
+            });
+          }
+        })
       })
-    })
+    } else {
+      rigs.forEach((rig) => {
+        if (rig.snapshots[0].temperature > 0) {
+          this.data.push({
+            group: rig.name,
+            date: rig.snapshots[0].timestamp,
+            value: rig.snapshots[0].temperature
+          })
+        }
+      })
+    }
+
+
+
     //console.log(this.data);
-    
-    
+
+
     this.data = [...this.data];
 
     // rigs.forEach((rig) => {
@@ -75,7 +102,7 @@ export class CchartsComponent implements OnInit {
     //     }
     //   }
     // });
-    
+
   }
 
 
