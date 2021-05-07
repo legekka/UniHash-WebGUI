@@ -11,15 +11,16 @@ import { EChartsOption, SeriesOption } from 'echarts';
 })
 export class ChartsComponent implements OnInit {
   private series: SeriesOption[] = [];
-  private xAxisData = [];
+
   // options
   options: EChartsOption = {
+    backgroundColor: 'rgba(0,0,0,0)',
     title: {
       text: 'Temperature'
     },
     legend: {
-      //data: ['bar', 'bar2'],
-      align: 'left',
+      align: "auto",
+      bottom: 1
     },
     tooltip: {
       trigger: 'axis'
@@ -27,14 +28,19 @@ export class ChartsComponent implements OnInit {
     series: this.series,
     xAxis: {
       name: 'Time',
-      type: 'category',
-      data: this.xAxisData,
-      axisLabel: {
-        formatter: t => {
-          let date = new Date(t);
-          return date.getFullYear() + "/" + date.getMonth() + "/" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+      type: 'time',
+      // axisLabel: {
+      //   formatter: t => {
+      //     let date = new Date(t);
+      //     return date.getFullYear() + "/" + date.getMonth() + "/" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+      //   }
+      // }
+      splitLine: {
+        show: true,
+        lineStyle: {
+          color: 'rgba(255,255,255,0.3)'
         }
-      }
+      },
     },
     yAxis: {
       name: 'Celsius (°C)',
@@ -44,7 +50,13 @@ export class ChartsComponent implements OnInit {
         formatter: t => {
           return t + "°C"
         }
-      }
+      },
+      splitLine: {
+        show: true,
+        lineStyle: {
+          color: 'rgba(255,255,255,0.3)'
+        }
+      },
     }
   };
 
@@ -63,15 +75,6 @@ export class ChartsComponent implements OnInit {
   }
 
   private addSnapshots(rigs: Rig[]): void {
-    if (this.xAxisData.length == 0) {
-      rigs.forEach(rig => {
-        rig.snapshots.forEach(snapshot => {
-          if (!this.xAxisData.includes(snapshot.timestamp))
-            this.xAxisData.push(snapshot.timestamp);
-        })
-      })
-    }
-    this.options.xAxis['data'] = this.xAxisData;
     rigs.forEach(rig => {
       const rigSeries = this.series.find(s => s.name === rig.name);
       if (rigSeries == null) {
@@ -79,20 +82,26 @@ export class ChartsComponent implements OnInit {
         let s: SeriesOption = {
           name: rig.name,
           data: data,
-          type: "line"
+          smooth: true,
+          showSymbol: false,
+          type: "line",
         }
-        this.xAxisData.forEach(timestamp => {
-          const snapshots = rig.snapshots.filter(snapshot => snapshot.timestamp === timestamp);
-          data.push(snapshots.length !== 0 ? snapshots[0].temperature > 0 ? snapshots[0].temperature : null : null);
-        });
-        (this.series as SeriesOption[]).push(s);
+        rig.snapshots.forEach(snapshot => {
+          if (snapshot.temperature > 0)
+            data.push([
+              snapshot.timestamp,
+              snapshot.temperature
+            ])
+        })
+        this.series.push(s);
       } else {
-        const data = rigSeries.data as number[];
-        data.push(rig.snapshots[0].temperature > 0 ? rig.snapshots[0].temperature : null);
-        data.shift();
-        if (this.xAxisData[this.xAxisData.length - 1] !== rig.snapshots[0].timestamp) {
-          this.xAxisData.push(rig.snapshots[0].timestamp);
-          this.xAxisData.shift();
+        if (rig.snapshots[0].temperature > 0) {
+          const data = rigSeries.data as any[];
+          data.push([
+            rig.snapshots[0].timestamp,
+            rig.snapshots[0].temperature
+          ]);
+          data.shift();
         }
       }
     })

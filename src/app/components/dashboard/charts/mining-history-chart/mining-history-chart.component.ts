@@ -3,6 +3,7 @@ import { switchMap, tap } from 'rxjs/operators';
 import { Rig } from 'src/app/models/rig';
 import { RigService } from 'src/app/services/rig/rig.service';
 import { EChartsOption, SeriesOption } from 'echarts';
+import { AUTO_STYLE } from '@angular/animations';
 
 @Component({
   selector: 'app-mining-history-chart',
@@ -11,36 +12,48 @@ import { EChartsOption, SeriesOption } from 'echarts';
 })
 export class MiningHistoryChartComponent implements OnInit {
   private series: SeriesOption[] = [];
-  private xAxisData = [];
   // options
   options: EChartsOption = {
+    backgroundColor: 'rgba(0,0,0,0)',
     title: {
       text: 'Mining History'
     },
     legend: {
-      //data: ['bar', 'bar2'],
       align: "auto",
       bottom: 1
     },
     tooltip: {
       trigger: 'axis'
     },
+    grid: {
+      show: true,
+    },
     series: this.series,
     xAxis: {
       name: 'Time',
-      type: 'category',
-      data: this.xAxisData,
-      axisLabel: {
-        formatter: t => {
-          let date = new Date(t);
-          return date.getFullYear() + "/" + date.getMonth() + "/" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+      type: 'time',
+      // axisLabel: {
+      //   formatter: t => {
+      //     let date = new Date(t);
+      //     return date.getFullYear() + "/" + date.getMonth() + "/" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+      //   }
+      // }
+      splitLine: {
+        show: true,
+        lineStyle: {
+          color: 'rgba(255,255,255,0.3)'
         }
-      }
+      },
     },
     yAxis: {
       name: 'Amount (BTC)',
       type: 'value',
       scale: true,
+      splitLine: {
+        lineStyle: {
+          color: 'rgba(255,255,255,0.3)'
+        }
+      },
       axisLabel: {
         formatter: t => {
           return parseFloat(t).toFixed(8) + " BTC"
@@ -56,7 +69,7 @@ export class MiningHistoryChartComponent implements OnInit {
   constructor(private rigService: RigService) { }
 
   ngOnInit(): void {
-    let from = new Date(new Date().getTime() - 1000 * 60 * 60 * 12);
+    let from = new Date(new Date().getTime() - 1000 * 60 * 60 * 9);
     this.rigService.getRigSnapshots(from).pipe(
       tap((rigs) => this.addSnapshots(rigs)),
       switchMap(() => this.rigService.getRigSnapshotSource()),
@@ -65,15 +78,6 @@ export class MiningHistoryChartComponent implements OnInit {
   }
 
   private addSnapshots(rigs: Rig[]): void {
-    if (this.xAxisData.length == 0) {
-      rigs.forEach(rig => {
-        rig.snapshots.forEach(snapshot => {
-          if (!this.xAxisData.includes(snapshot.timestamp))
-            this.xAxisData.push(snapshot.timestamp);
-        })
-      })
-    }
-    this.options.xAxis['data'] = this.xAxisData;
     rigs.forEach(rig => {
       const rigSeries = this.series.find(s => s.name === rig.name);
       if (rigSeries == null) {
@@ -82,22 +86,22 @@ export class MiningHistoryChartComponent implements OnInit {
           name: rig.name,
           data: data,
           type: "line",
-          stack: "counts"
+          stack: "counts",
+          showSymbol: false,
+          
         }
         s["areaStyle"] = { normal: {} };
-        this.xAxisData.forEach(timestamp => {
-          const snapshots = rig.snapshots.filter(snapshot => snapshot.timestamp === timestamp);
-          data.push(snapshots.length !== 0 ? snapshots[0].currentUnpaidAmount : null);
+        rig.snapshots.forEach(snapshot => {
+          data.push([
+            snapshot.timestamp,
+            snapshot.currentUnpaidAmount
+          ])
         });
         (this.series as any[]).push(s);
       } else {
-        const data = rigSeries.data as number[];
-        data.push(rig.snapshots[0].currentUnpaidAmount);
+        const data = rigSeries.data as any[];
+        data.push([rig.snapshots[0].timestamp, rig.snapshots[0].currentUnpaidAmount]);
         data.shift();
-        if (this.xAxisData[this.xAxisData.length - 1] !== rig.snapshots[0].timestamp) {
-          this.xAxisData.push(rig.snapshots[0].timestamp);
-          this.xAxisData.shift();
-        }
       }
     })
     this.options = { ...this.options };
