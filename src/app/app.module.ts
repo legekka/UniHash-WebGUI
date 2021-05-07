@@ -19,6 +19,7 @@ import { NgxEchartsModule } from 'ngx-echarts';
 import { ChartsComponent } from './components/dashboard/charts/charts.component';
 import { SummaryTablesComponent } from './components/dashboard/summary-tables/summary-tables.component';
 import { MatTableModule } from '@angular/material/table';
+import { MiningHistoryChartComponent } from './components/dashboard/charts/mining-history-chart/mining-history-chart.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { MatTableModule } from '@angular/material/table';
     TemperaturePipe,
     SummaryComponent,
     ChartsComponent,
-    SummaryTablesComponent
+    SummaryTablesComponent,
+    MiningHistoryChartComponent
   ],
   imports: [
     BrowserModule,

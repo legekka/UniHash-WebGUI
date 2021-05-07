@@ -5,21 +5,22 @@ import { RigService } from 'src/app/services/rig/rig.service';
 import { EChartsOption, SeriesOption } from 'echarts';
 
 @Component({
-  selector: 'app-charts',
-  templateUrl: './charts.component.html',
-  styleUrls: ['./charts.component.scss'],
+  selector: 'app-mining-history-chart',
+  templateUrl: './mining-history-chart.component.html',
+  styleUrls: ['./mining-history-chart.component.scss']
 })
-export class ChartsComponent implements OnInit {
+export class MiningHistoryChartComponent implements OnInit {
   private series: SeriesOption[] = [];
   private xAxisData = [];
   // options
   options: EChartsOption = {
     title: {
-      text: 'Temperature'
+      text: 'Mining History'
     },
     legend: {
       //data: ['bar', 'bar2'],
-      align: 'left',
+      align: "auto",
+      bottom: 1
     },
     tooltip: {
       trigger: 'axis'
@@ -37,12 +38,12 @@ export class ChartsComponent implements OnInit {
       }
     },
     yAxis: {
-      name: 'Celsius (°C)',
+      name: 'Amount (BTC)',
       type: 'value',
       scale: true,
       axisLabel: {
         formatter: t => {
-          return t + "°C"
+          return parseFloat(t).toFixed(8) + " BTC"
         }
       }
     }
@@ -55,7 +56,8 @@ export class ChartsComponent implements OnInit {
   constructor(private rigService: RigService) { }
 
   ngOnInit(): void {
-    this.rigService.getRigSnapshots().pipe(
+    let from = new Date(new Date().getTime() - 1000 * 60 * 60 * 12);
+    this.rigService.getRigSnapshots(from).pipe(
       tap((rigs) => this.addSnapshots(rigs)),
       switchMap(() => this.rigService.getRigSnapshotSource()),
       tap((rigs) => this.addSnapshots(rigs))
@@ -76,19 +78,21 @@ export class ChartsComponent implements OnInit {
       const rigSeries = this.series.find(s => s.name === rig.name);
       if (rigSeries == null) {
         const data = [];
-        let s: SeriesOption = {
+        let s = {
           name: rig.name,
           data: data,
-          type: "line"
+          type: "line",
+          stack: "counts"
         }
+        s["areaStyle"] = { normal: {} };
         this.xAxisData.forEach(timestamp => {
           const snapshots = rig.snapshots.filter(snapshot => snapshot.timestamp === timestamp);
-          data.push(snapshots.length !== 0 ? snapshots[0].temperature > 0 ? snapshots[0].temperature : null : null);
+          data.push(snapshots.length !== 0 ? snapshots[0].currentUnpaidAmount : null);
         });
-        (this.series as SeriesOption[]).push(s);
+        (this.series as any[]).push(s);
       } else {
         const data = rigSeries.data as number[];
-        data.push(rig.snapshots[0].temperature > 0 ? rig.snapshots[0].temperature : null);
+        data.push(rig.snapshots[0].currentUnpaidAmount);
         data.shift();
         if (this.xAxisData[this.xAxisData.length - 1] !== rig.snapshots[0].timestamp) {
           this.xAxisData.push(rig.snapshots[0].timestamp);
@@ -98,4 +102,5 @@ export class ChartsComponent implements OnInit {
     })
     this.options = { ...this.options };
   }
+
 }
