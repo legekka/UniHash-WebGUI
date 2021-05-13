@@ -1,11 +1,17 @@
-.current-unpaid-amounts,
-.total-unpaid-amounts {
+.card {
     .name {
         text-align: center;
         font-size: 2rem;
         margin: 1rem 2rem;
     }
-    .table {
-        width: 100%;
+    .container {
+        max-height: 400px;
+        overflow: auto;
+        .table {
+            width: 100%;
+        }
+    }
+    + .card {
+        margin-top: 8px;
     }
 }

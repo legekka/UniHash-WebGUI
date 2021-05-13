@@ -17,7 +17,7 @@ export class RigDetailsCardComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-
+  
   }
 
 }

@@ -1,6 +1,8 @@
 <mat-card>
   <mat-card-header>
-    <div mat-card-avatar></div>
+    <div mat-card-avatar>
+      <div class="miner-status" [class]="rig.latestSnapshot.minerStatus"></div>
+    </div>
     <mat-card-title>{{ rig.name }}</mat-card-title>
     <mat-card-subtitle>{{ rig.latestSnapshot.minerStatus | titlecase }}</mat-card-subtitle>
   </mat-card-header>
@@ -69,6 +71,24 @@
           <ng-container *ngIf="rig.latestSnapshot.powerUsage == null || rig.latestSnapshot.powerUsage == -1">
             -
           </ng-container>
+        </div>
+      </div>
+      <div class="property">
+        <div class="caption">
+          Fan speed:
+        </div>
+        <div class="progressbar">
+          <div class="container">
+            <div class="progress" [style.--progress-value]="rig.latestSnapshot.revolutionsPerMinutePercentage >= 0? rig.latestSnapshot.revolutionsPerMinutePercentage + '%' : '0' "></div>
+            <div class="value">
+              <ng-container *ngIf="rig.latestSnapshot.revolutionsPerMinute >= 0">
+                {{rig.latestSnapshot.revolutionsPerMinute}} RPM
+              </ng-container>
+              <ng-container *ngIf="rig.latestSnapshot.revolutionsPerMinute < 0">
+                -
+              </ng-container>
+            </div>
+          </div>
         </div>
       </div>
     </div>

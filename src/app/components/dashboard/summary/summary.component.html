@@ -43,7 +43,7 @@
       BTC-EUR price
     </mat-card-title>
     <mat-card-content>
-      {{ price.value | number:'1.2-2' }} {{ price.currency }}
+      {{ price?.value | currency: price?.currency:'symbol':'1.2-2'}}
     </mat-card-content>
   </mat-card>
 </div>
