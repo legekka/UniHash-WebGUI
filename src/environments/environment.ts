@@ -7,8 +7,9 @@ export const environment = {
   apiConfig:{
     protocol: 'http',
     domain: 'localhost',
-    port: 3000,
-    rigBaseUrl: 'rig'
+    port: 4242,
+    rigBaseUrl: 'rig',
+    priceBaseUrl: 'price'
   }
 };
 

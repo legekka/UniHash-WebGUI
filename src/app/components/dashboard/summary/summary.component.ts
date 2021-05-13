@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MiningAlgorithm } from 'src/app/models/mining-algorithm.enum';
 import { RigWithHelpers } from 'src/app/models/rig';
 import { MiningAlgorithmDisplayNames } from 'src/app/models/mining-algorithm.enum';
+import { PriceData } from 'src/app/models/price-data';
 
 @Component({
   selector: 'app-summary',
@@ -23,6 +24,9 @@ export class SummaryComponent implements OnInit {
     return this._rigs;
   }
   _rigs: RigWithHelpers[];
+
+  @Input()
+  price: PriceData;
 
   // Template helpers
   totalProfitability: number;

@@ -38,4 +38,12 @@
       {{ totalUnpaidAmount | number:'1.8-8' }} BTC
     </mat-card-content>
   </mat-card>
+  <mat-card class="price-card">
+    <mat-card-title>
+      BTC-EUR price
+    </mat-card-title>
+    <mat-card-content>
+      {{ price.value | number:'1.2-2' }} {{ price.currency }}
+    </mat-card-content>
+  </mat-card>
 </div>

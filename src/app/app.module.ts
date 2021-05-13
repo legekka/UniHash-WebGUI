@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { RigBaseUrl, SocketEndpoint } from './services/tokens';
+import { PriceBaseUrl, RigBaseUrl, SocketEndpoint } from './services/tokens';
 import { environment } from 'src/environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RigDetailsCardComponent } from './components/dashboard/rig-details-card/rig-details-card.component';
@@ -55,6 +55,10 @@ import { MiningHistoryChartComponent } from './components/dashboard/charts/minin
     {
       provide: RigBaseUrl,
       useValue: `${environment.apiConfig.protocol}://${environment.apiConfig.domain}${(environment.apiConfig.port != null ? ':' + environment.apiConfig.port : '')}/${environment.apiConfig.rigBaseUrl}`
+    },
+    {
+      provide: PriceBaseUrl,
+      useValue: `${environment.apiConfig.protocol}://${environment.apiConfig.domain}${(environment.apiConfig.port != null ? ':' + environment.apiConfig.port : '')}/${environment.apiConfig.priceBaseUrl}`
     }
   ],
   bootstrap: [AppComponent]
