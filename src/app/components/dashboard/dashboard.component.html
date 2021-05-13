@@ -1,10 +1,10 @@
 <div class="container">
-  <app-summary [rigs]="rigs" [price]="price"></app-summary>
+  <app-summary [rigs]="rigs" [price]="price" class="summary"></app-summary>
   <div class="rig-list">
-      <app-rig-details-card *ngFor="let rig of rigs" [rig]="rig">
-      </app-rig-details-card>
+    <app-rig-details-card *ngFor="let rig of rigs" [rig]="rig">
+    </app-rig-details-card>
   </div>
   <app-charts></app-charts>
   <app-mining-history-chart></app-mining-history-chart>
-  <app-summary-tables [rigs]="rigs"></app-summary-tables>
+  <app-summary-tables [rigs]="rigs" [price]="price"></app-summary-tables>
 </div>

@@ -1,39 +1,60 @@
-<div class="current-unpaid-amounts">
+<mat-card class="current-unpaid-amounts card">
   <div class="name">Current Unpaid Amounts</div>
-  <table mat-table [dataSource]="currentTableElements" class="table">
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-    </ng-container>
-    <ng-container matColumnDef="percentage">
-      <th mat-header-cell *matHeaderCellDef> Percentage </th>
-      <td mat-cell *matCellDef="let element"> {{element.percentage }} </td>
-    </ng-container>
-    <ng-container matColumnDef="amount">
-      <th mat-header-cell *matHeaderCellDef> Unpaid amount </th>
-      <td mat-cell *matCellDef="let element"> {{element.amount | number:'1.8-8' }} BTC</td>
-    </ng-container>
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-</div>
-
-<div class="total-unpaid-amounts">
+  <div class="container">
+    <table mat-table [dataSource]="currentTableElements" class="table">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        <td mat-footer-cell *matFooterCellDef> {{currentTableFooter?.name}}</td>
+      </ng-container>
+      <ng-container matColumnDef="percentage">
+        <th mat-header-cell *matHeaderCellDef> Percentage </th>
+        <td mat-cell *matCellDef="let element"> {{element.percentage }} </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+      <ng-container matColumnDef="amount">
+        <th mat-header-cell *matHeaderCellDef> Unpaid amount </th>
+        <td mat-cell *matCellDef="let element"> {{element.amount | number:'1.8-8' }} BTC</td>
+        <td mat-footer-cell *matFooterCellDef> {{currentTableFooter?.amount | number:'1.8-8'}} BTC</td>
+      </ng-container>
+      <ng-container matColumnDef="value">
+        <th mat-header-cell *matHeaderCellDef> EUR </th>
+        <td mat-cell *matCellDef="let element"> {{element.value | currency: 'EUR':'symbol':'1.2-2'}}</td>
+        <td mat-footer-cell *matFooterCellDef> {{currentTableFooter?.value | currency: 'EUR':'symbol':'1.2-2'}}</td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
+    </table>
+  </div>
+</mat-card>
+<mat-card class="total-unpaid-amounts card">
   <div class="name">Total Unpaid Amounts</div>
-  <table mat-table [dataSource]="totalTableElements" class="table">
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-    </ng-container>
-    <ng-container matColumnDef="percentage">
-      <th mat-header-cell *matHeaderCellDef> Percentage </th>
-      <td mat-cell *matCellDef="let element"> {{element.percentage }} </td>
-    </ng-container>
-    <ng-container matColumnDef="amount">
-      <th mat-header-cell *matHeaderCellDef> Unpaid amount </th>
-      <td mat-cell *matCellDef="let element"> {{element.amount | number:'1.8-8' }} BTC</td>
-    </ng-container>
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-</div>
+  <div class="container">
+    <table mat-table [dataSource]="totalTableElements" class="table">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        <td mat-footer-cell *matFooterCellDef> {{totalTableFooter?.name}}</td>
+      </ng-container>
+      <ng-container matColumnDef="percentage">
+        <th mat-header-cell *matHeaderCellDef> Percentage </th>
+        <td mat-cell *matCellDef="let element"> {{element.percentage }} </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+      <ng-container matColumnDef="amount">
+        <th mat-header-cell *matHeaderCellDef> Unpaid amount </th>
+        <td mat-cell *matCellDef="let element"> {{element.amount | number:'1.8-8' }} BTC</td>
+        <td mat-footer-cell *matFooterCellDef> {{totalTableFooter?.amount | number:'1.8-8'}} BTC</td>
+      </ng-container>
+      <ng-container matColumnDef="value">
+        <th mat-header-cell *matHeaderCellDef> EUR </th>
+        <td mat-cell *matCellDef="let element"> {{element.value | currency: 'EUR':'symbol':'1.2-2'}}</td>
+        <td mat-footer-cell *matFooterCellDef> {{totalTableFooter?.value | currency: 'EUR':'symbol':'1.2-2'}}</td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
+    </table>
+  </div>
+</mat-card>

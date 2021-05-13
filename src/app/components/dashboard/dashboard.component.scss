@@ -3,6 +3,10 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  
+  .summary {
+    margin-bottom: 16px;
+  }
 
   .rig-list {
       display: grid;
