@@ -46,6 +46,7 @@ export class SummaryComponent implements OnInit {
     this.totalProfitability = this.rigs.reduce((total, rig) => total += rig.latestSnapshot.profitability, 0);
     this.totalPowerUsage = this.rigs.reduce((total, rig) => total += rig.latestSnapshot.powerUsage, 0);
     this.totalUnpaidAmount = this.rigs.reduce((total, rig) => total += rig.latestSnapshot.totalUnpaidAmount, 0);
+    this.totalHashrateByAlgorithm.forEach(v => v.speed = 0);
     this.totalHashrateByAlgorithm = this.rigs.reduce((map, rig) => {
       if (rig.latestSnapshot.algorithm == null) {
         return map;
