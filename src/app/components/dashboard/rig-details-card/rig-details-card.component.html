@@ -1,82 +1,73 @@
-<mat-card>
+<mat-card class="simple-header">
   <mat-card-header>
-    <div mat-card-avatar>
-      <div class="miner-status" [class]="rig.latestSnapshot.minerStatus"></div>
-    </div>
     <mat-card-title>{{ rig.name }}</mat-card-title>
-    <mat-card-subtitle>{{ rig.latestSnapshot.minerStatus | titlecase }}</mat-card-subtitle>
+    <mat-card-subtitle>
+      <div class="status">
+        <div class="status-indicator" [class]="rig.latestSnapshot.minerStatus"></div>
+        <div class="status-name">{{ rig.latestSnapshot.minerStatus | titlecase }}</div>
+      </div>
+    </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
     <div class="properties">
       <div class="property">
-        <div class="caption">
-          Speed:
-        </div>
         <div class="value">
-          <ng-container *ngIf="rig.latestSnapshot.speed != null">
+          <ng-container *ngIf="rig.latestSnapshot.speed != null && rig.latestSnapshot.speed > 0">
             {{ rig.latestSnapshot.speed | number:'1.2-2' | hashrate:rig.latestSnapshot.displaySuffix }}
           </ng-container>
-          <ng-container *ngIf="rig.latestSnapshot.speed == null">
+          <ng-container *ngIf="rig.latestSnapshot.speed == null || rig.latestSnapshot.speed <= 0">
             -
           </ng-container>
         </div>
-      </div>
-      <div class="property">
         <div class="caption">
-          Algorithm:
-        </div>
-        <div class="value">
           <ng-container *ngIf="rig.latestSnapshot.speed != null">
             {{ MiningAlgorithmDisplayNames.get(rig.latestSnapshot.algorithm) }}
           </ng-container>
           <ng-container *ngIf="rig.latestSnapshot.speed == null">
-            -
+            Unknown algorithm
           </ng-container>
         </div>
       </div>
       <div class="property">
-        <div class="caption">
-          Profitability:
-        </div>
         <div class="value">
-          <ng-container *ngIf="rig.latestSnapshot.profitability != null">
-            {{ rig.latestSnapshot.profitability | number:'1.8-8' | profitability:'BTC' }}
+          <ng-container *ngIf="rig.latestSnapshot.profitability != null && rig.latestSnapshot.profitability > 0">
+            {{ rig.latestSnapshot.profitability*1000 | number:'1.5-5' | profitability:'mBTC' }}
           </ng-container>
-          <ng-container *ngIf="rig.latestSnapshot.profitability == null">
+          <ng-container *ngIf="rig.latestSnapshot.profitability == null || rig.latestSnapshot.profitability <= 0">
             -
           </ng-container>
         </div>
+        <div class="caption">
+          Profitability
+        </div>
       </div>
       <div class="property">
-        <div class="caption">
-          Temperature:
-        </div>
         <div class="value">
-          <ng-container *ngIf="rig.latestSnapshot.temperature != null">
+          <ng-container *ngIf="rig.latestSnapshot.temperature != null && rig.latestSnapshot.temperature > 0">
             {{ rig.latestSnapshot.temperature | temperature }}
           </ng-container>
-          <ng-container *ngIf="rig.latestSnapshot.temperature == null">
+          <ng-container *ngIf="rig.latestSnapshot.temperature == null || rig.latestSnapshot.temperature <= 0">
             -
           </ng-container>
         </div>
+        <div class="caption">
+          Temperature
+        </div>
       </div>
       <div class="property">
-        <div class="caption">
-          Power Usage:
-        </div>
         <div class="value">
-          <ng-container *ngIf="rig.latestSnapshot.powerUsage != null && rig.latestSnapshot.powerUsage != -1">
+          <ng-container *ngIf="rig.latestSnapshot.powerUsage != null && rig.latestSnapshot.powerUsage > 0">
             {{ rig.latestSnapshot.powerUsage | wattage}}
           </ng-container>
-          <ng-container *ngIf="rig.latestSnapshot.powerUsage == null || rig.latestSnapshot.powerUsage == -1">
+          <ng-container *ngIf="rig.latestSnapshot.powerUsage == null || rig.latestSnapshot.powerUsage <= 0">
             -
           </ng-container>
         </div>
+        <div class="caption">
+          Power Usage
+        </div>
       </div>
       <div class="property">
-        <div class="caption">
-          Fan speed:
-        </div>
         <div class="progressbar">
           <div class="container">
             <div class="progress" [style.--progress-value]="rig.latestSnapshot.revolutionsPerMinutePercentage >= 0? rig.latestSnapshot.revolutionsPerMinutePercentage + '%' : '0' "></div>
@@ -88,6 +79,9 @@
                 -
               </ng-container>
             </div>
+          </div>
+          <div class="caption">
+            Fan speed
           </div>
         </div>
       </div>

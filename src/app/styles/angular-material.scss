@@ -1,6 +1,16 @@
+.mat-icon {
+  user-select: none;
+}
+
 .mat-card {
   &.concise {
     .mat-card-header {
+      .mat-card-avatar {
+        display: flex;
+        place-items: center;
+        width: 32px;
+        margin-right: 8px;
+      }
       .mat-card-header-text {
         margin: 0;
 
@@ -10,6 +20,13 @@
         .mat-card-subtitle {
           margin: 0;
         }
+      }
+    }
+  }
+  &.simple-header {
+    .mat-card-header {
+      .mat-card-header-text {
+        margin: 0;
       }
     }
   }

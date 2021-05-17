@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class WattagePipe implements PipeTransform {
 
   transform(value: number): string {
-    return `${value} W/h`;
+    return `${value} W`;
   }
 
 }
