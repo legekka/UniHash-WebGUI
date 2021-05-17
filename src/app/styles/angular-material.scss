@@ -1,0 +1,16 @@
+.mat-card {
+  &.concise {
+    .mat-card-header {
+      .mat-card-header-text {
+        margin: 0;
+
+        .mat-card-title {
+          margin-bottom: 4px;
+        }
+        .mat-card-subtitle {
+          margin: 0;
+        }
+      }
+    }
+  }
+}

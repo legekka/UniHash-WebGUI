@@ -1,49 +1,52 @@
 <div class="cards">
-  <mat-card class="profitability">
-    <mat-card-title>
-      Profitability
-    </mat-card-title>
-    <mat-card-content>
-      {{ totalProfitability | number:'1.8-8' | profitability:'BTC' }}
-    </mat-card-content>
+  <mat-card class="concise profitability">
+    <mat-card-header>
+      <mat-card-title>
+        {{ totalProfitability*1000 | number:'1.5-5' | profitability:'mBTC' }}
+      </mat-card-title>
+      <mat-card-subtitle>
+        Profitability
+      </mat-card-subtitle>
+    </mat-card-header>
   </mat-card>
-  <mat-card class="hashrate-by-algorithm">
-    <mat-card-title>
-      Hashrate by algorithm
-    </mat-card-title>
-    <mat-card-content>
-      <div *ngFor="let algorithm of usedAlgorithms">
-        <div class="algorithm">
-          {{ MiningAlgorithmDisplayNames.get(algorithm) }}
-        </div>
-        <div class="hashrate">
-          {{ totalHashrateByAlgorithm.get(algorithm).speed | number:'1.2-2' | hashrate:totalHashrateByAlgorithm.get(algorithm).displaySuffix }}
-        </div>
-      </div>
-    </mat-card-content>
+  <mat-card class="concise unpaid-amount">
+    <mat-card-header>
+      <mat-card-title>
+        {{ totalUnpaidAmount*1000 | number:'1.5-5' }} mBTC
+      </mat-card-title>
+      <mat-card-subtitle>
+        Unpaid amount
+      </mat-card-subtitle>
+    </mat-card-header>
   </mat-card>
-  <mat-card class="power-usage">
-    <mat-card-title>
-      Power usage
-    </mat-card-title>
-    <mat-card-content>
-      {{ totalPowerUsage | wattage }}
-    </mat-card-content>
+  <mat-card class="concise power-usage">
+    <mat-card-header>
+      <mat-card-title>
+        {{ totalPowerUsage | wattage }}
+      </mat-card-title>
+      <mat-card-subtitle>
+        Power usage
+      </mat-card-subtitle>
+    </mat-card-header>
   </mat-card>
-  <mat-card class="unpaid-amount">
-    <mat-card-title>
-      Unpaid amount
-    </mat-card-title>
-    <mat-card-content>
-      {{ totalUnpaidAmount | number:'1.8-8' }} BTC
-    </mat-card-content>
+  <mat-card class="concise hashrate" *ngFor="let algorithm of usedAlgorithms">
+    <mat-card-header>
+      <mat-card-title>
+        {{ totalHashrateByAlgorithm.get(algorithm).speed | number:'1.2-2' | hashrate:totalHashrateByAlgorithm.get(algorithm).displaySuffix }}
+      </mat-card-title>
+      <mat-card-subtitle>
+        Total hashrate of {{ MiningAlgorithmDisplayNames.get(algorithm) }}
+      </mat-card-subtitle>
+    </mat-card-header>
   </mat-card>
-  <mat-card class="price-card">
+
+
+  <!-- <mat-card class="price-card">
     <mat-card-title>
       BTC-EUR price
     </mat-card-title>
     <mat-card-content>
       {{ price?.value | currency: price?.currency:'symbol':'1.2-2'}}
     </mat-card-content>
-  </mat-card>
+  </mat-card> -->
 </div>

@@ -1,10 +1,28 @@
 <div class="container">
-  <app-summary [rigs]="rigs" [price]="price" class="summary"></app-summary>
-  <div class="rig-list">
-    <app-rig-details-card *ngFor="let rig of rigs" [rig]="rig">
-    </app-rig-details-card>
+  <div class="section">
+    <div class="header">
+      Summary
+    </div>
+    <div class="content">
+      <app-summary [rigs]="rigs" [price]="price" class="summary"></app-summary>
+    </div>
   </div>
-  <app-charts></app-charts>
-  <app-mining-history-chart></app-mining-history-chart>
-  <app-summary-tables [rigs]="rigs" [price]="price"></app-summary-tables>
+  <div class="section">
+    <div class="header">
+      Rigs
+    </div>
+    <div class="content rig-list">
+      <app-rig-details-card class="rig" *ngFor="let rig of rigs" [rig]="rig"></app-rig-details-card>
+    </div>
+  </div>
+  <div class="section">
+    <div class="header">
+      Charts
+    </div>
+    <div class="content chart-list">
+      <!-- <app-temperature-chart></app-temperature-chart>
+      <app-mining-history-chart></app-mining-history-chart> -->
+    </div>
+  </div>
+  <!-- <app-summary-tables [rigs]="rigs" [price]="price"></app-summary-tables> -->
 </div>

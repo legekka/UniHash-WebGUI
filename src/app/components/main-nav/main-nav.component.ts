@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Rig } from 'src/app/models/rig';
-import { RigService } from 'src/app/services/rig/rig.service';
 
 @Component({
   selector: 'app-main-nav',

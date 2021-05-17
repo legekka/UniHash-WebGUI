@@ -16,9 +16,9 @@ import { WattagePipe } from './pipes/wattage/wattage.pipe';
 import { TemperaturePipe } from './pipes/temperature/temperature.pipe';
 import { SummaryComponent } from './components/dashboard/summary/summary.component';
 import { NgxEchartsModule } from 'ngx-echarts';
-import { ChartsComponent } from './components/dashboard/charts/charts.component';
 import { SummaryTablesComponent } from './components/dashboard/summary-tables/summary-tables.component';
 import { MatTableModule } from '@angular/material/table';
+import { TemperatureChartComponent } from './components/dashboard/charts/temperature-chart/temperature-chart.component';
 import { MiningHistoryChartComponent } from './components/dashboard/charts/mining-history-chart/mining-history-chart.component';
 
 @NgModule({
@@ -32,8 +32,8 @@ import { MiningHistoryChartComponent } from './components/dashboard/charts/minin
     WattagePipe,
     TemperaturePipe,
     SummaryComponent,
-    ChartsComponent,
     SummaryTablesComponent,
+    TemperatureChartComponent,
     MiningHistoryChartComponent
   ],
   imports: [

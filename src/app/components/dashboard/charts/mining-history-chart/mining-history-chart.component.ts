@@ -69,8 +69,8 @@ export class MiningHistoryChartComponent implements OnInit {
   constructor(private rigService: RigService) { }
 
   ngOnInit(): void {
-    let from = new Date(new Date().getTime() - 1000 * 60 * 60 * 9);
-    this.rigService.getRigSnapshots(from).pipe(
+    let from = new Date(Date.now() - 1000 * 60 * 60 * 9);
+    this.rigService.getRigSnapshots().pipe(
       tap((rigs) => this.addSnapshots(rigs)),
       switchMap(() => this.rigService.getRigSnapshotSource()),
       tap((rigs) => this.addSnapshots(rigs))
@@ -88,7 +88,7 @@ export class MiningHistoryChartComponent implements OnInit {
           type: "line",
           stack: "counts",
           showSymbol: false,
-          
+
         }
         s["areaStyle"] = { normal: {} };
         rig.snapshots.forEach(snapshot => {

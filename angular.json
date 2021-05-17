@@ -63,6 +63,14 @@
                   "maximumError": "10kb"
                 }
               ]
+            },
+            "staging": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.staging.ts"
+                }
+              ]
             }
           }
         },
@@ -74,6 +82,9 @@
           "configurations": {
             "production": {
               "browserTarget": "UniHash-WebGUI:build:production"
+            },
+            "staging": {
+              "browserTarget": "UniHash-WebGUI:build:staging"
             }
           }
         },

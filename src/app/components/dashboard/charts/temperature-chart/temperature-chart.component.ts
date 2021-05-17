@@ -5,11 +5,11 @@ import { RigService } from 'src/app/services/rig/rig.service';
 import { EChartsOption, SeriesOption } from 'echarts';
 
 @Component({
-  selector: 'app-charts',
-  templateUrl: './charts.component.html',
-  styleUrls: ['./charts.component.scss'],
+  selector: 'app-temperature-chart',
+  templateUrl: './temperature-chart.component.html',
+  styleUrls: ['./temperature-chart.component.scss'],
 })
-export class ChartsComponent implements OnInit {
+export class TemperatureChartComponent implements OnInit {
   private series: SeriesOption[] = [];
 
   // options
@@ -67,6 +67,7 @@ export class ChartsComponent implements OnInit {
   constructor(private rigService: RigService) { }
 
   ngOnInit(): void {
+    let from = new Date(Date.now() - 1000 * 60 * 60 * 2);
     this.rigService.getRigSnapshots().pipe(
       tap((rigs) => this.addSnapshots(rigs)),
       switchMap(() => this.rigService.getRigSnapshotSource()),
