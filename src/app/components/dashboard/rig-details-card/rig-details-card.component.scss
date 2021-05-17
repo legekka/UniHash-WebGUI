@@ -34,46 +34,50 @@
       }
     }
   }
-  .property {
-    + .property {
-      margin-top: 8px;
-    }
-    .caption {
-      font-size: 0.8rem;
-      color: #ffffff80;
-    }
-    > .value {
-      font-size: 1rem;
-    }
-    .progressbar {
-      .container {
-        @include mat-elevation(1);
-        width: 100%;
-        content: " ";
-        height: 24px;
-        background-color: rgba(0, 0, 0, 0.3);
-        border-radius: 4px;
-        overflow: hidden;
-        position: relative;
-        margin-top: 4px;
-
-        .progress {
-          width: var(--progress-value);
-          content: " ";
-          height: 100%;
-          background-color: rgba(255, 255, 255, 0.2);
-          transition: width 500ms;
+  .mat-card-content {
+    .properties {
+      .property {
+        + .property {
+          margin-top: 8px;
         }
+        .caption {
+          font-size: 0.8rem;
+          color: #ffffff80;
+        }
+        > .value {
+          font-size: 1rem;
+        }
+        .progressbar {
+          .container {
+            @include mat-elevation(1);
+            width: 100%;
+            content: " ";
+            height: 24px;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+            margin-top: 4px;
 
-        .value {
-          position: absolute;
-          font-weight: 500;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          font-size: 0.9rem;
+            .progress {
+              width: var(--progress-value);
+              content: " ";
+              height: 100%;
+              background-color: rgba(255, 255, 255, 0.2);
+              transition: width 500ms;
+            }
+
+            .value {
+              position: absolute;
+              font-weight: 500;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              font-size: 0.9rem;
+            }
+          }
         }
       }
-    }
+  }
   }
 }
