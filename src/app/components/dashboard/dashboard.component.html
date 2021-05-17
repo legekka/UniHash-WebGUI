@@ -7,21 +7,23 @@
       <app-summary [rigs]="rigs" [price]="price" class="summary"></app-summary>
     </div>
   </div>
-  <div class="section">
+  <div class="section horizontal-overflow rigs">
     <div class="header">
       Rigs
     </div>
-    <div class="content rig-list">
-      <app-rig-details-card class="rig" *ngFor="let rig of rigs" [rig]="rig"></app-rig-details-card>
+    <div class="content">
+      <div class="scrollable rig-list">
+        <app-rig-details-card class="rig" *ngFor="let rig of rigs" [rig]="rig"></app-rig-details-card>
+      </div>
     </div>
   </div>
-  <div class="section">
+  <div class="section charts">
     <div class="header">
       Charts
     </div>
     <div class="content chart-list">
-      <!-- <app-temperature-chart></app-temperature-chart>
-      <app-mining-history-chart></app-mining-history-chart> -->
+      <app-temperature-chart></app-temperature-chart>
+      <app-mining-history-chart></app-mining-history-chart>
     </div>
   </div>
   <!-- <app-summary-tables [rigs]="rigs" [price]="price"></app-summary-tables> -->

@@ -1,32 +1,49 @@
 .container {
-  padding: 8px;
   display: flex;
   flex-direction: column;
   gap: 16px;
 
   .section {
-    .header {
-      font-size: 1.4rem;
-      font-weight: 400;
-      margin: 16px 8px;
-    }
-    .content {
-      &.rig-list {
-        display: flex;
-        gap: 8px;
+    padding: 0 8px;
+
+    &.horizontal-overflow {
+      padding: 0;
+
+      .header {
+        padding: 0 8px;
+      }
+      .content {
         overflow-x: overlay;
         padding-bottom: 16px;
         margin-bottom: -16px;
+
+        .scrollable {
+          padding: 0 8px;
+          width: fit-content;
+        }
+      }
+    }
+    &.rigs {
+      .rig-list {
+        display: flex;
+        gap: 8px;
 
         .rig {
           min-width: 300px;
         }
       }
-      &.chart-list {
+    }
+    &.charts {
+      .chart-list {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(640px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(840px, 1fr));
         gap: 8px;
       }
+    }
+    .header {
+      font-size: 1.4rem;
+      font-weight: 400;
+      margin: 16px 8px;
     }
   }
 
