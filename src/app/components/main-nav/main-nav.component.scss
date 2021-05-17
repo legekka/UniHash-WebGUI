@@ -1,11 +1,31 @@
+@import '~@angular/material/theming';
+
 .mat-sidenav-container {
   height: 100vh;
-  
+
   .mat-sidenav {
     width: 196px;
   }
-  
+
   .mat-sidenav-content {
-    
+    --toolbar-height: 56px;
+    .mat-toolbar {
+      @include mat-elevation(5, #000, 30%);
+
+      position: sticky;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      height: var(--toolbar-height);
+
+      .btc-price {
+        font-weight: 400;
+        font-size: 1rem;
+      }
+    }
+    .content {
+      max-height: calc(100vh - var(--toolbar-height));
+      overflow: auto;
+    }
   }
 }

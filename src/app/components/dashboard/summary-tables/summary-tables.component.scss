@@ -1,17 +1,25 @@
-.card {
+:host {
+  display: grid;
+  // 100vw - 20px: nem tudom, ennyit kellett kivonni hogy ne overflow-zzon telefon képernyőn
+  grid-template-columns: repeat(auto-fit, minmax(min(840px, calc(100vw - 20px)), 1fr));
+  gap: 8px;
+
+  .card {
     .name {
-        text-align: center;
-        font-size: 2rem;
-        margin: 1rem 2rem;
+      text-align: center;
+      font-size: 2rem;
+      margin: 1rem 2rem;
     }
     .container {
-        max-height: 400px;
-        overflow: auto;
-        .table {
-            width: 100%;
+      max-height: 400px;
+      overflow: auto;
+      .table {
+        width: 100%;
+
+        .mat-footer-cell {
+          font-weight: 600;
         }
+      }
     }
-    + .card {
-        margin-top: 8px;
-    }
+  }
 }

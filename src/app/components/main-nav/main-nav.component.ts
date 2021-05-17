@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PriceData } from 'src/app/models/price-data';
+import { PriceService } from 'src/app/services/price/price.service';
 
 @Component({
   selector: 'app-main-nav',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainNavComponent implements OnInit {
 
-  constructor() { }
+  price: PriceData;
+
+  constructor(
+    private priceService: PriceService
+  ) { }
 
   ngOnInit(): void {
+    this.priceService.getPriceSource().subscribe(priceData => this.price = priceData);
   }
 
 }

@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+  padding: 8px 0;
 
   .section {
     padding: 0 8px;
@@ -36,7 +37,16 @@
     &.charts {
       .chart-list {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(840px, 1fr));
+        // 100vw - 20px: nem tudom, ennyit kellett kivonni hogy ne overflow-zzon telefon képernyőn
+        grid-template-columns: repeat(auto-fit, minmax(min(840px, calc(100vw - 20px)), 1fr));
+        gap: 8px;
+      }
+    }
+    &.payments {
+      .payment-table-list {
+        display: grid;
+        // 100vw - 20px: nem tudom, ennyit kellett kivonni hogy ne overflow-zzon telefon képernyőn
+        grid-template-columns: repeat(auto-fit, minmax(min(840px, calc(100vw - 20px)), 1fr));
         gap: 8px;
       }
     }

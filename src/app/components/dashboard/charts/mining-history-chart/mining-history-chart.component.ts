@@ -46,7 +46,7 @@ export class MiningHistoryChartComponent implements OnInit {
       },
     },
     yAxis: {
-      name: 'Amount (BTC)',
+      name: 'Amount (mBTC)',
       type: 'value',
       scale: true,
       splitLine: {
@@ -56,7 +56,7 @@ export class MiningHistoryChartComponent implements OnInit {
       },
       axisLabel: {
         formatter: t => {
-          return parseFloat(t).toFixed(8) + " BTC"
+          return (parseFloat(t) * 1000).toFixed(5) + " mBTC"
         }
       }
     }

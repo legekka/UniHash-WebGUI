@@ -3,6 +3,12 @@
 
   </mat-sidenav> -->
   <mat-sidenav-content>
-    <router-outlet></router-outlet>
+    <mat-toolbar #toolbar>
+      <div class="title">UniHash</div>
+      <div class="btc-price">1 BTC ~ {{ price?.value | currency: price?.currency:'symbol':'1.2-2'}}</div>
+    </mat-toolbar>
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
