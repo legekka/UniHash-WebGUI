@@ -1,6 +1,6 @@
 <mat-card class="current-unpaid-amounts card">
   <div class="name">Current Unpaid Amounts</div>
-  <div class="container">
+  <div class="container" [class.custom-scrollbar]="isDesktop">
     <table mat-table [dataSource]="currentTableElements" class="table">
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef> Name </th>
@@ -30,7 +30,7 @@
 </mat-card>
 <mat-card class="total-unpaid-amounts card">
   <div class="name">Total Unpaid Amounts</div>
-  <div class="container">
+  <div class="container" [class.custom-scrollbar]="isDesktop">
     <table mat-table [dataSource]="totalTableElements" class="table">
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef> Name </th>

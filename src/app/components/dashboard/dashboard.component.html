@@ -11,7 +11,7 @@
     <div class="header">
       Rigs
     </div>
-    <div class="content">
+    <div class="content" [class.custom-scrollbar]="isDesktop">
       <div class="scrollable rig-list">
         <app-rig-details-card class="rig" *ngFor="let rig of rigs" [rig]="rig"></app-rig-details-card>
       </div>

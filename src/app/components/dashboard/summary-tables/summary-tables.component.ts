@@ -3,6 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { element } from 'protractor';
 import { PriceData } from 'src/app/models/price-data';
 import { RigWithHelpers } from 'src/app/models/rig';
+import { PlatformService } from 'src/app/services/platform/platform.service';
 
 @Component({
   selector: 'app-summary-tables',
@@ -10,6 +11,8 @@ import { RigWithHelpers } from 'src/app/models/rig';
   styleUrls: ['./summary-tables.component.scss']
 })
 export class SummaryTablesComponent implements OnInit {
+
+  isDesktop: boolean;
 
   @Input()
   set rigs(value) {
@@ -34,11 +37,13 @@ export class SummaryTablesComponent implements OnInit {
   currentTableFooter: TableElement;
   totalTableFooter: TableElement;
 
-  constructor() { }
+  constructor(
+    private platformService: PlatformService
+  ) { }
 
   ngOnInit(): void {
+    this.isDesktop = this.platformService.isDesktop();
   }
-
 
   private refreshSummaryTables(): void {
     this.currentTableElements = [];
@@ -75,7 +80,7 @@ export class SummaryTablesComponent implements OnInit {
       this.totalTableElements.push(element);
     });
 
-    amount =  this.rigs.reduce((total, rig) => total += rig.latestSnapshot.totalUnpaidAmount, 0); 
+    amount =  this.rigs.reduce((total, rig) => total += rig.latestSnapshot.totalUnpaidAmount, 0);
     element = {
       name: "Total",
       percentage: "",

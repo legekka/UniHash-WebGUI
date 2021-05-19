@@ -3,6 +3,7 @@ import { map } from 'rxjs/operators';
 import { PriceData } from 'src/app/models/price-data';
 import { CreateRigWithHelpers, Rig, RigWithHelpers } from 'src/app/models/rig';
 import { RigStatus } from 'src/app/models/rig-snapshot';
+import { PlatformService } from 'src/app/services/platform/platform.service';
 import { PriceService } from 'src/app/services/price/price.service';
 import { RigService } from 'src/app/services/rig/rig.service';
 
@@ -25,12 +26,15 @@ const PriorityByMiningStatus: Map<RigStatus, number> = new Map([
 })
 export class DashboardComponent implements OnInit {
 
+  isDesktop: boolean;
+
   rigs: RigWithHelpers[];
   price: PriceData;
 
   constructor(
     private rigService: RigService,
-    private priceService: PriceService
+    private priceService: PriceService,
+    private platformService: PlatformService
   ) { }
 
   ngOnInit(): void {
@@ -41,6 +45,7 @@ export class DashboardComponent implements OnInit {
       this.rigs = rigs;
     });
     this.priceService.getPriceSource().subscribe(priceData => this.price = priceData);
+    this.isDesktop = this.platformService.isDesktop();
   }
 
   // Private helpers
